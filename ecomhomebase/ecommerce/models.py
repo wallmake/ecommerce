@@ -9,6 +9,7 @@ preset set of niches available to choose from if not available they can add it
 """
 class Niche(models.Model):
     name = models.CharField(max_length = 50)
+    no_of_merchants = models.IntegerField()
 class Store(models.Model):
     owner = models.CharField(max_length=100)
     niche = models.ForeignKey(Niche,on_delete=models.CASCADE)
@@ -20,6 +21,8 @@ class Category(models.Model):
     def isEmpty(self):
         return self.no_of_items == 0
     orderCount = models.IntegerField()
+
+    
 class Cart(models.Model):
     # this variable will serve as the name of the shopper so we can have a reciept when someone is done shopping we can ge the name, the items they bought, the total price all from this model in the spirit of getting a transaction history we should probably save all of this information in a reciept model
     shopper = models.CharField(max_length = 200 )
@@ -44,5 +47,6 @@ class Item(models.Model):
     price  = models.IntegerField()
     description = models.CharField(max_length=200)
     image = models.ImageField()
+
 #instanceofstore.
 
