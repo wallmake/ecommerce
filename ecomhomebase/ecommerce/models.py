@@ -7,12 +7,18 @@ categories under clothing items -> footwears, bodywears.
 when a user clicks on the create store button they give it a name and they a
 preset set of niches available to choose from if not available they can add it 
 """
+class Owner(models.Model):
+    name =  models.CharField(max_length=300)
+    time_joined = models.DateTimeField()
+    no_of_stores = models.IntegerField()
+
 class Niche(models.Model):
     name = models.CharField(max_length = 50)
     no_of_merchants = models.IntegerField()
 class Store(models.Model):
-    owner = models.CharField(max_length=100)
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
     niche = models.ForeignKey(Niche,on_delete=models.CASCADE)
+
 
 class Category(models.Model):
     name = models.CharField(max_length = 100)
